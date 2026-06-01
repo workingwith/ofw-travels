@@ -1,0 +1,2331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OFW Essential Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --green: #22c55e;
+  --green-dark: #16a34a;
+  --green-deeper: #15803d;
+  --green-light: #dcfce7;
+  --green-mid: #bbf7d0;
+  --green-faint: #f0fdf4;
+  --ink: #0f1a0f;
+  --ink-soft: #1e2d1e;
+  --text: #374151;
+  --text-muted: #6b7280;
+  --text-light: #9ca3af;
+  --border: #e5e7eb;
+  --border-light: #f3f4f6;
+  --white: #ffffff;
+  --hero-bg: #0f1a0f;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 24px rgba(0,0,0,0.10);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #ffffff;
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── HEADER (nav + hero combined) ──── */
+.site-header {
+  background: var(--hero-bg);
+  position: relative;
+  overflow: hidden;
+}
+.site-header::before {
+  content: '';
+  position: absolute;
+  top: -80px; left: 50%;
+  transform: translateX(-50%);
+  width: 700px; height: 400px;
+  background: radial-gradient(ellipse, rgba(34,197,94,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Top bar ── */
+.nav-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: rgba(15,26,15,0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 10px 24px;
+}
+.nav-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.nav-brand {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-brand-dot {
+  width: 26px; height: 26px;
+  background: var(--green);
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+/* pill container */
+.nav-pill-wrap {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50px;
+  padding: 4px 5px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  justify-content: center;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.nav-pill-wrap::-webkit-scrollbar { display: none; }
+
+.nav-btn {
+  padding: 7px 14px;
+  border: none;
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.55);
+  cursor: pointer;
+  white-space: nowrap;
+  border-radius: 50px;
+  transition: all 0.18s;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+.nav-btn:hover {
+  color: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.08);
+}
+.nav-btn.active {
+  background: var(--green);
+  color: var(--hero-bg);
+  font-weight: 700;
+}
+
+/* ── Hero content ── */
+.hero {
+  padding: 72px 24px 68px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.hero-flag { font-size: 2rem; margin-bottom: 14px; display: block; }
+.hero h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  max-width: 640px;
+  margin: 0 auto 14px;
+}
+.hero h1 span { color: var(--green); }
+.hero-sub {
+  font-size: 0.95rem;
+  color: #9ca3af;
+  max-width: 460px;
+  margin: 0 auto;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+/* ─── MOBILE NAV ───────────────────────── */
+@media (max-width: 640px) {
+  .nav-wrap { padding: 8px 12px; }
+  .nav-brand span.brand-label { display: none; }
+  .nav-pill-wrap {
+    padding: 3px 4px;
+    gap: 1px;
+  }
+  .nav-btn {
+    padding: 6px 10px;
+    font-size: 0.72rem;
+  }
+  /* hide emoji on mobile to save space */
+  .nav-btn .nav-emoji { display: none; }
+  .hero { padding: 48px 16px 52px; }
+  .hero-flag { font-size: 1.6rem; }
+}
+
+/* ─── TOC SHARED STYLES ────────────────── */
+.toc-wrap {
+  background: #f9fafb;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 32px;
+  margin: 36px 0 52px;
+}
+.toc-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.toc-sub {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+.toc-list { display: flex; flex-direction: column; gap: 2px; }
+
+.toc-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  border: 1.5px solid transparent;
+  transition: background 0.18s, border-color 0.18s, transform 0.15s;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.toc-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(34,197,94,0.08) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.18s;
+}
+.toc-item:hover {
+  background: var(--green-faint);
+  border-color: var(--green);
+  transform: translateX(3px);
+}
+.toc-item:hover::before { opacity: 1; }
+.toc-item:hover .toc-icon-wrap { background: var(--green); border-color: var(--green); }
+.toc-item:hover .toc-icon-wrap span { filter: brightness(0) invert(1); }
+.toc-item:hover .toc-item-title { color: var(--green-deeper); }
+.toc-item:hover .toc-item-count { color: var(--green-dark); background: var(--green-light); }
+
+.toc-icon-wrap {
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+  transition: background 0.18s, border-color 0.18s;
+}
+.toc-item-text { flex: 1; min-width: 0; }
+.toc-item-title {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--ink);
+  transition: color 0.18s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.toc-item-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.toc-item-count {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-light);
+  background: var(--border-light);
+  padding: 2px 8px;
+  border-radius: 50px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color 0.18s, background 0.18s;
+}
+.toc-arrow {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  flex-shrink: 0;
+  transition: color 0.18s, transform 0.15s;
+}
+.toc-item:hover .toc-arrow {
+  color: var(--green);
+  transform: translateX(2px);
+}
+
+@media (max-width: 600px) {
+  .toc-wrap { padding: 20px 16px; }
+  .toc-item { padding: 9px 10px; gap: 10px; }
+  .toc-item-desc { display: none; }
+  .toc-item-count { display: none; }
+}
+
+/* ─── PAGE ─────────────────────────────── */
+.page { display: none; }
+.page.active { display: block; }
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 64px 24px;
+}
+
+/* ─── SECTION LABELS ─────────────────────── */
+.section-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--green-dark);
+  margin-bottom: 10px;
+}
+.section-heading {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-bottom: 16px;
+}
+.section-sub {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  max-width: 540px;
+  line-height: 1.75;
+}
+
+/* ─── DEFINITIONS (Editorial List Style) ─── */
+.def-list { margin-top: 56px; }
+
+.def-item {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 48px;
+  padding: 48px 0;
+  border-top: 1px solid var(--border);
+  align-items: start;
+}
+.def-item:last-child { border-bottom: 1px solid var(--border); }
+
+.def-left { position: relative; }
+.def-number {
+  font-family: 'Sora', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--green-mid);
+  line-height: 1;
+  margin-bottom: 12px;
+  letter-spacing: -0.04em;
+}
+.def-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.def-acronym {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--green-dark);
+  text-transform: uppercase;
+}
+
+.def-right {}
+.def-intro {
+  font-size: 1rem;
+  color: var(--text);
+  line-height: 1.75;
+  margin-bottom: 24px;
+}
+
+.def-block {
+  margin-bottom: 20px;
+}
+.def-block-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.def-block-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.def-block ul {
+  list-style: none;
+  padding: 0;
+}
+.def-block ul li {
+  padding: 5px 0 5px 20px;
+  font-size: 0.88rem;
+  color: var(--text);
+  line-height: 1.65;
+  position: relative;
+}
+.def-block ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-size: 0.75rem;
+  top: 7px;
+}
+
+.steps-ol {
+  counter-reset: s;
+  list-style: none;
+  padding: 0;
+}
+.steps-ol li {
+  counter-increment: s;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 7px 0;
+  font-size: 0.88rem;
+  color: var(--text);
+  line-height: 1.65;
+}
+.steps-ol li::before {
+  content: counter(s);
+  min-width: 22px; height: 22px;
+  background: var(--green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.callout {
+  background: var(--green-faint);
+  border-left: 3px solid var(--green);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+  line-height: 1.65;
+  margin-top: 16px;
+}
+.callout.warn {
+  background: #fff7ed;
+  border-color: #f97316;
+  color: #7c2d12;
+}
+
+/* ─── FLOWCHART ─────────────────────────── */
+.flow-outer {
+  max-width: 680px;
+  margin: 48px auto 0;
+}
+.flow-start-node {
+  background: var(--hero-bg);
+  color: #fff;
+  border-radius: 50px;
+  padding: 14px 32px;
+  text-align: center;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  display: inline-block;
+  margin: 0 auto;
+}
+.flow-center { text-align: center; }
+.flow-arrow {
+  text-align: center;
+  color: var(--green);
+  font-size: 1.4rem;
+  margin: 4px 0;
+  line-height: 1;
+}
+.flow-step {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  margin: 0 auto;
+  max-width: 580px;
+  box-shadow: var(--shadow);
+}
+.flow-step-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--green-dark);
+  margin-bottom: 5px;
+}
+.flow-step-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.flow-step-body {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+.flow-step.highlight {
+  border-color: var(--green);
+  background: var(--green-faint);
+}
+.flow-step.highlight .flow-step-title { color: var(--green-deeper); }
+
+.flow-diamond {
+  background: #f9fafb;
+  border: 2px dashed var(--green);
+  border-radius: var(--radius);
+  padding: 14px 20px;
+  text-align: center;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+.flow-branch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  max-width: 580px;
+  margin: 6px auto;
+}
+.branch-head {
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+.yes { color: var(--green-dark); }
+.no { color: #ef4444; }
+
+.flow-box {
+  background: #f9fafb;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  font-size: 0.82rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+.flow-box.g { border-color: var(--green); background: var(--green-faint); }
+.flow-box.r { border-color: #fca5a5; background: #fff5f5; color: #7f1d1d; }
+.flow-box strong { display: block; margin-bottom: 4px; color: var(--ink); font-weight: 600; }
+
+.flow-end-node {
+  background: var(--green);
+  color: #fff;
+  border-radius: 50px;
+  padding: 14px 32px;
+  text-align: center;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  display: inline-block;
+  margin: 0 auto;
+  box-shadow: 0 4px 20px rgba(34,197,94,0.35);
+}
+
+/* ─── VACATION TIMELINE ─────────────────── */
+.timeline {
+  max-width: 700px;
+  margin: 48px auto 0;
+  position: relative;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--green), var(--green-mid), transparent);
+}
+.tl-item {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 36px;
+  position: relative;
+}
+.tl-num {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 4px var(--green-light);
+  position: relative;
+  z-index: 1;
+}
+.tl-content { flex: 1; padding-top: 8px; }
+.tl-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.tl-body {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.tl-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.tl-tag {
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+.tag-dmw  { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+.tag-owwa { background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
+.tag-bi   { background: #faf5ff; color: #6b21a8; border: 1px solid #e9d5ff; }
+.tag-doc  { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
+.tag-imm  { background: #f0fdf4; color: #14532d; border: 1px solid #bbf7d0; }
+
+/* ─── KIDS SECTION ─────────────────────── */
+.kids-intro {
+  max-width: 600px;
+  margin-bottom: 48px;
+}
+.kids-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+@media (max-width: 680px) {
+  .kids-compare { grid-template-columns: 1fr; }
+  .def-item { grid-template-columns: 1fr; gap: 16px; }
+  .flow-branch { grid-template-columns: 1fr; }
+}
+.kids-col {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+.kids-col-head {
+  padding: 20px 24px;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+.kids-col-head.green-head { background: var(--green); color: #fff; }
+.kids-col-head.pink-head  { background: #ec4899; color: #fff; }
+.kids-col-sub {
+  font-size: 0.75rem;
+  font-weight: 400;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+.kids-col-body { padding: 20px 24px; }
+.req-row {
+  display: flex;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 0.84rem;
+  color: var(--text);
+  line-height: 1.6;
+  align-items: flex-start;
+}
+.req-row:last-child { border-bottom: none; }
+.req-row .ico { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+.req-row strong { color: var(--ink); }
+
+/* ─── PTA & SPECIAL CLAUSES ─────────────── */
+.clause-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 32px;
+}
+.clause-item {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  background: var(--white);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.clause-item:hover {
+  border-color: var(--green);
+  box-shadow: 0 4px 16px rgba(34,197,94,0.1);
+}
+.clause-icon { font-size: 1.6rem; margin-bottom: 10px; }
+.clause-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.clause-body {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.clause-body strong { color: var(--ink-soft); }
+
+.big-callout {
+  background: var(--hero-bg);
+  border-radius: var(--radius-lg);
+  padding: 28px 32px;
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.big-callout .bc-icon { font-size: 2rem; }
+.big-callout .bc-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--green);
+  margin-bottom: 8px;
+}
+.big-callout .bc-body {
+  font-size: 0.84rem;
+  color: #d1fae5;
+  line-height: 1.75;
+}
+
+/* ─── DIVIDER ─────────────────────────── */
+hr.light { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+/* ─── BI TIPS PAGE ─────────────────────── */
+.tips-hero {
+  background: linear-gradient(135deg, var(--hero-bg) 0%, #0a2a14 100%);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  margin-bottom: 48px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 24px;
+  align-items: center;
+  border: 1px solid rgba(34,197,94,0.2);
+}
+.tips-hero-icon { font-size: 3rem; }
+.tips-hero-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.tips-hero-sub { font-size: 0.88rem; color: #86efac; line-height: 1.65; }
+
+.tips-section { margin-bottom: 52px; }
+.tips-section-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--green-light);
+}
+.tips-section-icon {
+  width: 44px; height: 44px;
+  background: var(--green-faint);
+  border: 1.5px solid var(--green-mid);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+.tips-section-label {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.tips-section-count {
+  margin-left: auto;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--green-dark);
+  background: var(--green-faint);
+  border: 1px solid var(--green-mid);
+  padding: 3px 10px;
+  border-radius: 50px;
+  letter-spacing: 0.5px;
+}
+
+.tip-list { display: flex; flex-direction: column; gap: 14px; }
+
+.tip-item {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 18px 20px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+.tip-item:hover {
+  border-color: var(--green);
+  box-shadow: 0 2px 12px rgba(34,197,94,0.1);
+}
+.tip-item.starred {
+  border-color: var(--green);
+  background: var(--green-faint);
+}
+.tip-num {
+  width: 32px; height: 32px;
+  background: var(--hero-bg);
+  color: var(--green);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.tip-item.starred .tip-num {
+  background: var(--green);
+  color: #fff;
+}
+.tip-body {}
+.tip-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.tip-desc {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+.tip-desc strong { color: var(--ink-soft); }
+.tip-badge {
+  display: inline-block;
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+.badge-mustknow { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+.badge-trick { background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
+.badge-ofw { background: var(--green-faint); color: var(--green-deeper); border: 1px solid var(--green-mid); }
+.badge-kids { background: #fdf4ff; color: #7e22ce; border: 1px solid #e9d5ff; }
+
+.tip-redbox {
+  background: #fff5f5;
+  border: 1.5px solid #fca5a5;
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-top: 20px;
+}
+.tip-redbox-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #7f1d1d;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tip-redbox ul {
+  list-style: none;
+  padding: 0;
+}
+.tip-redbox ul li {
+  font-size: 0.83rem;
+  color: #991b1b;
+  padding: 4px 0 4px 20px;
+  position: relative;
+  line-height: 1.6;
+}
+.tip-redbox ul li::before {
+  content: '✗';
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+}
+
+@media (max-width: 480px) {
+  .container { padding: 40px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- SITE HEADER: nav + hero in one dark block -->
+<header class="site-header">
+
+  <!-- STICKY NAV -->
+  <nav class="nav-wrap">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <div class="nav-brand-dot">🇵🇭</div>
+        <span class="brand-label">OFW Guide</span>
+      </div>
+      <div class="nav-pill-wrap">
+        <button class="nav-btn active" onclick="showPage('definitions', this)"><span class="nav-emoji">📖 </span>Definitions</button>
+        <button class="nav-btn" onclick="showPage('flowchart', this)"><span class="nav-emoji">🗺 </span>Pre-Departure</button>
+        <button class="nav-btn" onclick="showPage('vacation', this)"><span class="nav-emoji">✈️ </span>Vacation & Return</button>
+        <button class="nav-btn" onclick="showPage('kids', this)"><span class="nav-emoji">👨‍👩‍👧 </span>Bringing Family</button>
+        <button class="nav-btn" onclick="showPage('bitips', this)"><span class="nav-emoji">🛂 </span>PH Immigration</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO CONTENT -->
+  <div class="hero">
+    <span class="hero-flag">🇵🇭</span>
+    <h1>The OFW <span>Essential</span><br>Clearance Guide</h1>
+    <p class="hero-sub">Everything a documented OFW needs to know — contracts, OWWA, OEC, vacations, and bringing your family abroad.</p>
+  </div>
+
+</header>
+
+<!-- ══════════════════ DEFINITIONS ══════════════════ -->
+<div id="page-definitions" class="page active">
+<div class="container">
+  <div class="section-eyebrow">OFW Documentation</div>
+  <h2 class="section-heading">What every OFW needs to understand<br>before stepping on that plane.</h2>
+  <p class="section-sub">Four critical documents and processes — each one protecting you legally, financially, and as a worker abroad.</p>
+
+  <!-- DEFINITIONS TOC -->
+  <div class="toc-wrap">
+    <div class="toc-title">In this section</div>
+    <div class="toc-sub">Four essential documents — click any to jump straight to it.</div>
+    <div class="toc-list">
+      <a class="toc-item" onclick="scrollToId('def-contract')">
+        <div class="toc-icon-wrap"><span>📋</span></div>
+        <div class="toc-item-text">
+          <div class="toc-item-title">01 — Contract Validation</div>
+          <div class="toc-item-desc">Why your contract must be verified by DMW before you leave</div>
+        </div>
+        <span class="toc-arrow">→</span>
+      </a>
+      <a class="toc-item" onclick="scrollToId('def-owwa')">
+        <div class="toc-icon-wrap"><span>🛡️</span></div>
+        <div class="toc-item-text">
+          <div class="toc-item-title">02 — OWWA Membership</div>
+          <div class="toc-item-desc">Your welfare safety net — repatriation, legal aid, scholarships & more</div>
+        </div>
+        <span class="toc-arrow">→</span>
+      </a>
+      <a class="toc-item" onclick="scrollToId('def-oec')">
+        <div class="toc-icon-wrap"><span>🟦</span></div>
+        <div class="toc-item-text">
+          <div class="toc-item-title">03 — Overseas Employment Certificate (OEC)</div>
+          <div class="toc-item-desc">Your exit clearance and travel tax exemption document</div>
+        </div>
+        <span class="toc-arrow">→</span>
+      </a>
+      <a class="toc-item" onclick="scrollToId('def-exemption')">
+        <div class="toc-icon-wrap"><span>✅</span></div>
+        <div class="toc-item-text">
+          <div class="toc-item-title">04 — OEC Exemption (Balik-Manggagawa)</div>
+          <div class="toc-item-desc">Returning to the same employer? You may skip the full OEC process</div>
+        </div>
+        <span class="toc-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="def-list">
+
+    <!-- 01 CONTRACT VALIDATION -->
+    <div class="def-item" id="def-contract">
+      <div class="def-left">
+        <div class="def-number">01</div>
+        <div class="def-title">Contract Validation</div>
+        <div class="def-acronym">DMW / POEA Process</div>
+      </div>
+      <div class="def-right">
+        <p class="def-intro">Before you sign a contract and board a flight, the Philippine government <strong>must verify your employment agreement is legitimate, fair, and legal</strong>. This is contract validation — your first and most important line of defence against illegal recruitment, exploitative terms, and bait-and-switch job offers.</p>
+
+        <div class="def-block">
+          <div class="def-block-label">Why it matters</div>
+          <ul>
+            <li>Confirms your employer is DMW-accredited and not a scam operation</li>
+            <li>Ensures salary meets the host country's minimum wage or industry standard</li>
+            <li>Verifies your job title matches exactly what was offered</li>
+            <li>Protects you from illegal deductions, bond clauses, or forced overtime</li>
+            <li>Without it, you cannot get an OEC — you cannot legally leave as an OFW</li>
+          </ul>
+        </div>
+
+        <div class="def-block">
+          <div class="def-block-label">What DMW checks</div>
+          <ul>
+            <li>Salary amount and payment schedule</li>
+            <li>Rest days, work hours, overtime rules</li>
+            <li>Free accommodation and food provisions (if applicable)</li>
+            <li>Medical insurance and repatriation clause</li>
+            <li>Termination conditions and notice periods</li>
+          </ul>
+        </div>
+
+        <div class="def-block">
+          <div class="def-block-label">How to get it</div>
+          <ol class="steps-ol">
+            <li>Secure a written job offer or employment contract from your employer</li>
+            <li>Your employer (or licensed recruitment agency) submits the contract to DMW online or in person</li>
+            <li>DMW reviews the terms — this can take a few days to 2 weeks</li>
+            <li>Once approved, DMW stamps and validates the contract</li>
+            <li>You sign the validated contract — this signed copy is part of your OEC requirements</li>
+          </ol>
+        </div>
+
+        <div class="callout warn">⚠️ A contract signed directly with your employer abroad without DMW validation is NOT legally binding under Philippine law. Always go through proper channels.</div>
+      </div>
+    </div>
+
+    <!-- 02 OWWA -->
+    <div class="def-item" id="def-owwa">
+      <div class="def-left">
+        <div class="def-number">02</div>
+        <div class="def-title">OWWA Membership</div>
+        <div class="def-acronym">Overseas Workers Welfare Administration</div>
+      </div>
+      <div class="def-right">
+        <p class="def-intro">OWWA is your <strong>welfare safety net for the entire duration of your overseas work</strong>. For just USD 25 every two years, you and your dependents gain access to a wide range of government benefits — from crisis repatriation to college scholarships for your children.</p>
+
+        <div class="def-block">
+          <div class="def-block-label">Benefits you receive</div>
+          <ul>
+            <li>🏠 <strong>Free repatriation</strong> if your employer defaults, goes bankrupt, or your country hosts a crisis</li>
+            <li>⚖️ <strong>Legal assistance</strong> for labor disputes and contract violations abroad</li>
+            <li>🎓 <strong>Education for Dependents (EDSP)</strong> — scholarships and education assistance for your children</li>
+            <li>💊 <strong>Medical & disability benefits</strong> for work-related illness or injury</li>
+            <li>🪦 <strong>Death and burial assistance</strong> — financial aid for your family</li>
+            <li>💼 <strong>Livelihood and re-integration programs</strong> for when you return to the Philippines</li>
+            <li>🌀 <strong>Calamity assistance</strong> if your host country experiences natural disasters or civil unrest</li>
+            <li>👶 <strong>Welfare programs for OFW children</strong> left in the Philippines</li>
+          </ul>
+        </div>
+
+        <div class="def-block">
+          <div class="def-block-label">How to get it</div>
+          <ol class="steps-ol">
+            <li>Go to the nearest OWWA Regional Office, POLO office (if abroad), or accredited bank</li>
+            <li>Fill out the OWWA Membership Contribution Form</li>
+            <li>Pay the membership fee: <strong>USD 25.00</strong> (or PHP equivalent)</li>
+            <li>Receive your OWWA receipt — keep this, it's required for your OEC</li>
+            <li>Membership is valid for <strong>2 years per contract</strong> — renew when you return or when it expires</li>
+          </ol>
+        </div>
+
+        <div class="callout">💡 Even if your employer offers to pay for OWWA, always confirm and get your own copy of the receipt. You'll need it.</div>
+      </div>
+    </div>
+
+    <!-- 03 OEC -->
+    <div class="def-item" id="def-oec">
+      <div class="def-left">
+        <div class="def-number">03</div>
+        <div class="def-title">Overseas Employment Certificate</div>
+        <div class="def-acronym">OEC — Your Exit Clearance</div>
+      </div>
+      <div class="def-right">
+        <p class="def-intro">The OEC is your <strong>official government clearance to depart the Philippines as a documented OFW</strong>. It proves your contract is validated, your OWWA is active, and that you are a legal, registered worker — not undocumented. It also unlocks significant airport exemptions.</p>
+
+        <div class="def-block">
+          <div class="def-block-label">What it does for you</div>
+          <ul>
+            <li>Serves as your exit clearance at Philippine airports (presented to Bureau of Immigration)</li>
+            <li>Exempts you from paying <strong>Travel Tax (₱1,620)</strong></li>
+            <li>Exempts you from paying <strong>Terminal Fee (₱550+)</strong></li>
+            <li>Proves legal OFW status — protects you from being offloaded at the airport</li>
+            <li>Valid for <strong>60 days</strong> from date of issue</li>
+          </ul>
+        </div>
+
+        <div class="def-block">
+          <div class="def-block-label">How to apply</div>
+          <ol class="steps-ol">
+            <li>Visit <strong>oec.dmw.gov.ph</strong> (BM Online System) or go to a DMW Regional Office</li>
+            <li>Create an account or log in to your existing DMW account</li>
+            <li>Input your employer, job site, contract details, and upload required documents</li>
+            <li>Required documents: valid passport, validated employment contract, OWWA receipt, work visa</li>
+            <li>Download and print your OEC upon approval</li>
+            <li>Present at the OFW Lane at the airport on departure day</li>
+          </ol>
+        </div>
+
+        <div class="callout warn">⚠️ The OEC has a 60-day expiry. If your travel date shifts past that window, you need to apply for a new one. Do not apply too early.</div>
+      </div>
+    </div>
+
+    <!-- 04 OEC EXEMPTION -->
+    <div class="def-item" id="def-exemption">
+      <div class="def-left">
+        <div class="def-number">04</div>
+        <div class="def-title">OEC Exemption</div>
+        <div class="def-acronym">Balik-Manggagawa — Returning OFW</div>
+      </div>
+      <div class="def-right">
+        <p class="def-intro">Not every OFW needs to go through the full OEC process each time they return abroad. If you are going back to the <strong>same employer, same country, and same job</strong>, you qualify for an OEC Exemption — a streamlined clearance that still gives you the same airport exemptions.</p>
+
+        <div class="def-block">
+          <div class="def-block-label">Who qualifies</div>
+          <ul>
+            <li>Returning OFW to <strong>the same employer, same country, same job position</strong></li>
+            <li>Your previous OEC is on file in the DMW system</li>
+            <li>Your OWWA membership is still active</li>
+            <li>Philippine permanent residents or immigrants departing for work</li>
+            <li>Filipinos holding foreign nationality</li>
+          </ul>
+        </div>
+
+        <div class="def-block">
+          <div class="def-block-label">Who does NOT qualify</div>
+          <ul>
+            <li>Changing employers — even in the same country</li>
+            <li>Transferring to a different country</li>
+            <li>Taking a different job title or role</li>
+            <li>First-time OFW workers with no previous OEC record</li>
+            <li>Workers whose contracts have significantly changed</li>
+          </ul>
+        </div>
+
+        <div class="def-block">
+          <div class="def-block-label">How to get it</div>
+          <ol class="steps-ol">
+            <li>Go to <strong>oec.dmw.gov.ph</strong> and log in to your DMW/BM Online account</li>
+            <li>System will auto-check your eligibility based on your records</li>
+            <li>If qualified, an OEC Exemption document is generated</li>
+            <li>Download and print the exemption certificate</li>
+            <li>Present at the airport — you still get travel tax and terminal fee exemptions</li>
+          </ol>
+        </div>
+
+        <div class="callout">💡 Even with an exemption, always travel with your passport, work visa, and a copy of your employment contract — immigration officers may still ask for these.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════ FLOWCHART ══════════════════ -->
+<div id="page-flowchart" class="page">
+<div class="container">
+  <div class="section-eyebrow">Step-by-Step</div>
+  <h2 class="section-heading">Pre-Departure Flowchart</h2>
+  <p class="section-sub">Follow this process from job offer to airport departure. Every OFW — first-timer or returning — should run through these steps.</p>
+
+  <div class="flow-outer">
+
+    <div class="flow-center"><div class="flow-start-node">🇵🇭 You have a Job Offer Abroad</div></div>
+    <div class="flow-arrow">↓</div>
+
+    <div class="flow-step highlight">
+      <div class="flow-step-label">Step 1</div>
+      <div class="flow-step-title">Contract Validation</div>
+      <div class="flow-step-body">Submit your employment contract to DMW — via an accredited agency or directly. DMW reviews salary, job title, employer legitimacy, and work conditions.</div>
+    </div>
+    <div class="flow-arrow">↓</div>
+
+    <div class="flow-diamond">Is the contract validated and stamped by DMW?</div>
+    <div class="flow-arrow">↓</div>
+
+    <div class="flow-branch">
+      <div>
+        <div class="branch-head yes">✅ YES</div>
+        <div class="flow-box g">Contract approved. Proceed to OWWA.</div>
+      </div>
+      <div>
+        <div class="branch-head no">❌ NO</div>
+        <div class="flow-box r">Renegotiate terms or change to an accredited employer. Cannot proceed without validation.</div>
+      </div>
+    </div>
+    <div class="flow-arrow">↓</div>
+
+    <div class="flow-step highlight">
+      <div class="flow-step-label">Step 2</div>
+      <div class="flow-step-title">OWWA Membership</div>
+      <div class="flow-step-body">Pay USD 25 at any OWWA office, POLO, or accredited bank. Keep your receipt — this is required for the OEC application.</div>
+    </div>
+    <div class="flow-arrow">↓</div>
+
+    <div class="flow-diamond">Is OWWA membership paid and active?</div>
+    <div class="flow-arrow">↓</div>
+
+    <div class="flow-branch">
+      <div>
+        <div class="branch-head yes">✅ YES</div>
+        <div class="flow-box g">Proceed to OEC application.</div>
+      </div>
+      <div>
+        <div class="branch-head no">❌ NO</div>
+        <div class="flow-box r">Pay OWWA first. No OEC will be issued without an active membership.</div>
+      </div>
+    </div>
+    <div class="flow-arrow">↓</div>
+
+    <div class="flow-step highlight">
+      <div class="flow-step-label">Step 3</div>
+      <div class="flow-step-title">Am I a Returning OFW?</div>
+      <div class="flow-step-body">This determines whether you need a full OEC or qualify for the faster OEC Exemption (Balik-Manggagawa).</div>
+    </div>
+    <div class="flow-arrow">↓</div>
+
+    <div class="flow-diamond">Same employer · same country · same job?</div>
+    <div class="flow-arrow">↓</div>
+
+    <div class="flow-branch">
+      <div>
+        <div class="branch-head yes">✅ Returning OFW</div>
+        <div class="flow-box g"><strong>Apply for OEC Exemption</strong>Log in to oec.dmw.gov.ph → BM Online. System auto-validates. Download exemption cert. Still exempt from travel tax + terminal fee.</div>
+      </div>
+      <div>
+        <div class="branch-head no">🆕 New / First-Timer</div>
+        <div class="flow-box"><strong>Apply for Full OEC</strong>Submit at DMW office or oec.dmw.gov.ph. Bring: passport, validated contract, OWWA receipt, work visa. OEC valid for 60 days.</div>
+      </div>
+    </div>
+    <div class="flow-arrow">↓</div>
+
+    <div class="flow-step">
+      <div class="flow-step-label">Step 4 — Pre-Departure Checklist</div>
+      <div class="flow-step-title">Before You Head to the Airport</div>
+      <div class="flow-step-body">
+        ✅ Valid passport (6+ months beyond contract end date)<br>
+        ✅ Work visa / residence permit for host country<br>
+        ✅ Attend PDOS (Pre-Departure Orientation Seminar)<br>
+        ✅ OEC or OEC Exemption printout<br>
+        ✅ Validated employment contract copy<br>
+        ✅ Emergency contacts registered with DFA / POLO
+      </div>
+    </div>
+    <div class="flow-arrow">↓</div>
+
+    <div class="flow-center"><div class="flow-end-node">✈️ Cleared to Depart — Documented OFW!</div></div>
+
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════ VACATION & RETURN ══════════════════ -->
+<div id="page-vacation" class="page">
+<div class="container">
+  <div class="section-eyebrow">Vacation Planning</div>
+  <h2 class="section-heading">Going Home on Vacation —<br>Then Returning to Your Employer</h2>
+  <p class="section-sub">Vacationing in the Philippines feels different when you're an OFW. Here's the exact process for leaving, spending time home, and returning abroad to the same job.</p>
+
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-num">1</div>
+      <div class="tl-content">
+        <div class="tl-title">Before You Leave Your Host Country</div>
+        <div class="tl-tags"><span class="tl-tag tag-doc">DOCS</span><span class="tl-tag tag-imm">IMMIGRATION</span></div>
+        <div class="tl-body">
+          <strong style="color:var(--ink)">Secure from your employer / HR:</strong><br>
+          ✅ Written leave approval with return date<br>
+          ✅ Re-entry visa or clearance — <em>critical for Qatar and similar countries where re-entry must be stamped before you leave</em><br>
+          ✅ Confirmation that your labor contract is still active and valid<br><br>
+          Check your work visa / residence permit expiry. If it expires while you're in PH, arrange renewal before you go or immediately upon return.
+        </div>
+        <div class="callout" style="margin-top:12px">🌍 <strong>GCC-specific:</strong> Most GCC countries (Qatar, Saudi Arabia, Kuwait, Bahrain, Oman) require a re-entry visa or exit permit for workers before leaving. In Qatar and Saudi Arabia especially — never depart without your employer processing the re-entry clearance on your residency permit first. UAE workers on employment visas should verify re-entry rules with their HR as policies vary by company and free zone.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-num">2</div>
+      <div class="tl-content">
+        <div class="tl-title">While on Vacation in the Philippines</div>
+        <div class="tl-tags"><span class="tl-tag tag-dmw">DMW</span><span class="tl-tag tag-owwa">OWWA</span></div>
+        <div class="tl-body">
+          ✅ <strong>Check your OWWA status</strong> — membership is valid for 2 years. If it's expiring, renew it now while you're home (much easier than renewing abroad).<br><br>
+          ✅ <strong>Check your OEC validity</strong> — if your last OEC has expired (60-day window), you'll need a new one or an exemption before you fly back.<br><br>
+          ✅ Update your family emergency contact at your nearest OWWA office.<br><br>
+          ✅ If you have pending OWWA benefit claims (scholarships, medical), process them while in the country.
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-num">3</div>
+      <div class="tl-content">
+        <div class="tl-title">Apply for Your Balik-Manggagawa OEC or Exemption</div>
+        <div class="tl-tags"><span class="tl-tag tag-dmw">BM ONLINE — oec.dmw.gov.ph</span></div>
+        <div class="tl-body">
+          <strong style="color:var(--ink)">You qualify for OEC Exemption if:</strong><br>
+          ✅ Returning to same employer · same country · same job<br>
+          ✅ Your contract is still active and on file with DMW<br>
+          ✅ Previous OEC is in the DMW system<br><br>
+          <strong style="color:var(--ink)">You need a NEW full OEC if:</strong><br>
+          ❌ Your contract was renewed with changes to role or salary<br>
+          ❌ You transferred to a new employer or new work location<br>
+          ❌ No previous OEC record on file<br><br>
+          💾 Always download and print your OEC or exemption before airport day. Don't rely on mobile screenshots alone.
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-num">4</div>
+      <div class="tl-content">
+        <div class="tl-title">Airport Day — Philippine Departure</div>
+        <div class="tl-tags"><span class="tl-tag tag-bi">BI CHECK</span><span class="tl-tag tag-doc">PRESENT THESE</span></div>
+        <div class="tl-body">
+          Present the following at the <strong>OFW Lane (Bureau of Immigration)</strong>:<br><br>
+          📄 Valid Philippine passport<br>
+          📄 OEC or OEC Exemption printout<br>
+          📄 Valid work visa / residence permit for host country<br>
+          📄 Employer's leave return letter (optional but helpful)<br><br>
+          ✅ You are exempt from Travel Tax (₱1,620) and Terminal Fee<br>
+          ✅ Use the dedicated OFW lane — faster processing
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-num">5</div>
+      <div class="tl-content">
+        <div class="tl-title">Arriving Back at Your Host Country</div>
+        <div class="tl-tags"><span class="tl-tag tag-imm">HOST COUNTRY IMMIGRATION</span></div>
+        <div class="tl-body">
+          Present your valid work visa and re-entry permit at immigration.<br><br>
+          ✅ Re-register your return with your employer's HR on Day 1<br>
+          ✅ Confirm your next leave entitlement period<br>
+          ✅ Update your address with the Philippine Consulate / POLO if you've moved<br>
+          ✅ Re-register via DFA e-Register: <em>eregistry.dfa.gov.ph</em>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════ FAMILY ══════════════════ -->
+<div id="page-kids" class="page">
+<div class="container">
+  <div class="section-eyebrow">Family Travel</div>
+  <h2 class="section-heading">Bringing Your Family Abroad</h2>
+  <p class="section-sub">Whether it's your kids, your spouse, or your elderly parents — each has different requirements depending on purpose (vacation vs. relocation) and destination. Know exactly what to prepare so you're not over-packing documents or under-prepared.</p>
+
+  <!-- QUICK NAVIGATOR -->
+  <div class="toc-wrap">
+    <div class="toc-title">What's in this guide</div>
+    <div class="toc-sub">Jump to the section that matches your situation.</div>
+    <div class="toc-list">
+      <a class="toc-item" onclick="scrollToId('sec-kids-work')">
+        <div class="toc-icon-wrap" style="background:var(--green-faint);border-color:var(--green-mid);"><span>👶</span></div>
+        <div class="toc-item-text">
+          <div class="toc-item-title">Kids — Relocating to Your Country of Work</div>
+          <div class="toc-item-desc">Long-term dependent visa, school transfer, medical clearance</div>
+        </div>
+        <span class="toc-arrow">→</span>
+      </a>
+      <a class="toc-item" onclick="scrollToId('sec-kids-vacation')">
+        <div class="toc-icon-wrap" style="background:#fffbeb;border-color:#fde68a;"><span>✈️</span></div>
+        <div class="toc-item-text">
+          <div class="toc-item-title">Kids — Vacation Visit (Country of Work or Third Country)</div>
+          <div class="toc-item-desc">Short stay — passport, tourist visa, PTA only</div>
+        </div>
+        <span class="toc-arrow">→</span>
+      </a>
+      <a class="toc-item" onclick="scrollToId('sec-spouse')">
+        <div class="toc-icon-wrap" style="background:#fdf4ff;border-color:#e9d5ff;"><span>💑</span></div>
+        <div class="toc-item-text">
+          <div class="toc-item-title">Spouse / Partner</div>
+          <div class="toc-item-desc">Dependent visa vs. short visit — what's needed for each</div>
+        </div>
+        <span class="toc-arrow">→</span>
+      </a>
+      <a class="toc-item" onclick="scrollToId('sec-senior')">
+        <div class="toc-icon-wrap" style="background:#fff7ed;border-color:#fed7aa;"><span>👴</span></div>
+        <div class="toc-item-text">
+          <div class="toc-item-title">Senior Citizen Parents</div>
+          <div class="toc-item-desc">Relocation rules, fit-to-fly, GCC salary thresholds</div>
+        </div>
+        <span class="toc-arrow">→</span>
+      </a>
+      <a class="toc-item" onclick="scrollToId('sec-pta')">
+        <div class="toc-icon-wrap" style="background:var(--green-faint);border-color:var(--green-mid);"><span>✍️</span></div>
+        <div class="toc-item-text">
+          <div class="toc-item-title">Parental Travel Authority (PTA) Guide</div>
+          <div class="toc-item-desc">When it's required, where to notarize, GCC options</div>
+        </div>
+        <span class="toc-arrow">→</span>
+      </a>
+      <a class="toc-item" onclick="scrollToId('sec-special')">
+        <div class="toc-icon-wrap" style="background:#fff5f5;border-color:#fca5a5;"><span>⚠️</span></div>
+        <div class="toc-item-text">
+          <div class="toc-item-title">Special Clauses & Edge Cases</div>
+          <div class="toc-item-desc">Widows, solo parents, unreachable other parent, dual citizens</div>
+        </div>
+        <span class="toc-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── KIDS SECTION HEADING ── -->
+  <div style="margin-bottom:24px;" id="sec-kids">
+    <div class="section-eyebrow">Children</div>
+    <h3 class="section-heading" style="font-size:1.5rem;">Bringing Your Kids</h3>
+    <p class="section-sub">The documents you need depend heavily on <strong>why</strong> and <strong>where</strong> your child is going. A vacation trip to Japan requires far fewer documents than a full relocation to your GCC country of work. Read each scenario carefully.</p>
+  </div>
+
+  <!-- PURPOSE LEGEND -->
+  <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:28px;">
+    <span style="display:flex;align-items:center;gap:6px;font-size:0.8rem;font-weight:600;color:var(--green-deeper);background:var(--green-faint);border:1.5px solid var(--green-mid);padding:5px 12px;border-radius:6px;">🔵 RELOCATION = Child will live with you long-term</span>
+    <span style="display:flex;align-items:center;gap:6px;font-size:0.8rem;font-weight:600;color:#92400e;background:#fffbeb;border:1.5px solid #fde68a;padding:5px 12px;border-radius:6px;">🟡 VACATION = Short-term visit, child returns to PH</span>
+  </div>
+
+  <div class="kids-compare" id="sec-kids-work" style="margin-bottom:40px;">
+    <!-- TO COUNTRY OF WORK (RELOCATION) -->
+    <div class="kids-col">
+      <div class="kids-col-head green-head">
+        🟢 Relocating to Your Country of Work
+        <div class="kids-col-sub">Child will live with you long-term (e.g. GCC, Singapore, Hong Kong)</div>
+      </div>
+      <div class="kids-col-body">
+
+        <div style="font-size:0.7rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--green-deeper);margin:0 0 10px;padding:6px 0;border-bottom:2px solid var(--green-light);">🔵 RELOCATION DOCUMENTS</div>
+
+        <div class="req-row"><span class="ico">📘</span><span><strong>Philippine Passport</strong> — child's own passport, valid at least <strong>18 months</strong> from travel date (longer validity needed for visa applications)</span></div>
+        <div class="req-row"><span class="ico">🪪</span><span><strong>Dependent / Family Residency Visa</strong> — applied through your employer's HR or host country immigration. In GCC countries, tied to your residency ID (QID, Emirates ID, Iqama, etc.). Monthly salary minimums vary by country.</span></div>
+        <div class="req-row"><span class="ico">📋</span><span><strong>PSA Birth Certificate</strong> — authenticated/apostilled copy proving parentage (required for visa application)</span></div>
+        <div class="req-row"><span class="ico">💍</span><span><strong>PSA Marriage Certificate</strong> — if applicable, to prove family unit for the visa</span></div>
+        <div class="req-row"><span class="ico">✍️</span><span><strong>Parental Travel Authority (PTA)</strong> — if child travels without the other parent. Notarized consent required at Philippine BI.</span></div>
+        <div class="req-row"><span class="ico">🏫</span><span><strong>School Withdrawal / Transfer Papers</strong> — if child is currently enrolled in a Philippine school</span></div>
+        <div class="req-row"><span class="ico">💉</span><span><strong>Vaccination Records</strong> — required for school enrollment in most host countries</span></div>
+        <div class="req-row"><span class="ico">🏥</span><span><strong>Medical Clearance / Health Certificate</strong> — some GCC countries require this for dependent visa processing</span></div>
+
+        <div class="callout" style="margin-top:14px;">🌍 <strong>GCC:</strong> The sponsoring parent must hold a valid residency ID and active work contract. Salary minimums apply. Processing time: 2–4 weeks. Start the visa process <em>before</em> the child travels.</div>
+      </div>
+    </div>
+
+    <!-- VACATION TO COUNTRY OF WORK -->
+    <div class="kids-col" id="sec-kids-vacation">
+      <div class="kids-col-head" style="background:#f59e0b;color:#fff;">
+        🟡 Vacation Visit — Country of Work
+        <div class="kids-col-sub">Short stay, child goes back to PH (e.g. school break with you in Qatar/UAE)</div>
+      </div>
+      <div class="kids-col-body">
+
+        <div style="font-size:0.7rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#92400e;margin:0 0 10px;padding:6px 0;border-bottom:2px solid #fde68a;">🟡 VACATION DOCUMENTS ONLY</div>
+
+        <div class="req-row"><span class="ico">📘</span><span><strong>Philippine Passport</strong> — valid at least <strong>6 months</strong> beyond the return travel date</span></div>
+        <div class="req-row"><span class="ico">🌍</span><span><strong>Tourist / Visit Visa</strong> for your host country — apply at the host country's embassy in the Philippines, or your employer/sponsor may be able to sponsor a visit visa. GCC countries have visit visa options.</span></div>
+        <div class="req-row"><span class="ico">✍️</span><span><strong>Parental Travel Authority (PTA)</strong> — required at Philippine BI if child is not with both parents</span></div>
+        <div class="req-row"><span class="ico">📋</span><span><strong>PSA Birth Certificate</strong> — bring a copy as backup for BI or destination immigration</span></div>
+        <div class="req-row"><span class="ico">🎫</span><span><strong>Return flight ticket</strong> — proof that child is coming back to the Philippines</span></div>
+        <div class="req-row"><span class="ico">🏦</span><span><strong>Proof of accommodation</strong> — your address/accommodation in the host country</span></div>
+
+        <div class="callout warn" style="margin-top:14px;">⚠️ <strong>Vacation = no school transfer, no medical clearance, no apostilled documents needed.</strong> Keep your document prep minimal and purposeful.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VACATION TO THIRD COUNTRY -->
+  <div style="margin-bottom:52px;">
+    <div style="font-size:0.78rem;font-weight:700;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:16px;display:flex;align-items:center;gap:10px;">
+      <span style="height:1px;flex:1;background:var(--border);"></span>
+      VACATION TO A THIRD COUNTRY (not your country of work)
+      <span style="height:1px;flex:1;background:var(--border);"></span>
+    </div>
+    <div class="kids-col" style="max-width:680px;margin:0 auto;border-color:#ec4899;">
+      <div class="kids-col-head pink-head">
+        🩷 Family Vacation — Different Country
+        <div class="kids-col-sub">e.g. Japan, Spain, Thailand, South Korea, Europe</div>
+      </div>
+      <div class="kids-col-body">
+        <div style="font-size:0.7rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#9d174d;margin:0 0 10px;padding:6px 0;border-bottom:2px solid #fce7f3;">🟡 VACATION DOCUMENTS ONLY</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px;">
+          <div>
+            <div class="req-row"><span class="ico">📘</span><span><strong>Passport</strong> — valid 6 months beyond return date</span></div>
+            <div class="req-row"><span class="ico">🌍</span><span><strong>Tourist Visa</strong> for destination (Schengen needs proof of accommodation + insurance)</span></div>
+            <div class="req-row"><span class="ico">✍️</span><span><strong>PTA</strong> — if not traveling with both parents</span></div>
+            <div class="req-row"><span class="ico">📋</span><span><strong>PSA Birth Certificate</strong> — copy as backup</span></div>
+          </div>
+          <div>
+            <div class="req-row"><span class="ico">🎫</span><span><strong>Return flight ticket</strong></span></div>
+            <div class="req-row"><span class="ico">🏦</span><span><strong>Financial proof</strong> — bank statement, hotel bookings</span></div>
+            <div class="req-row"><span class="ico">🛡️</span><span><strong>Travel insurance</strong> — required for Schengen; recommended for all</span></div>
+            <div class="req-row"><span class="ico">📞</span><span><strong>DFA e-Register</strong> — register before traveling</span></div>
+          </div>
+        </div>
+        <div class="callout warn" style="margin-top:14px;">⚠️ Philippine BI may offload a minor without a valid PTA if only one parent accompanies them. No school transfer, no vaccination records, no medical clearance needed for a vacation trip.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPOUSE / PARTNER -->
+  <hr class="light" style="margin:0 0 48px">
+  <div id="sec-spouse" style="margin-bottom:40px;">
+    <div class="section-eyebrow">Spouse &amp; Partner</div>
+    <h3 class="section-heading" style="font-size:1.5rem;">Bringing Your Spouse or Partner</h3>
+    <p class="section-sub">Requirements differ significantly between bringing a spouse for a short visit versus sponsoring them as a long-term dependent.</p>
+  </div>
+
+  <div class="kids-compare" style="margin-bottom:48px;">
+    <div class="kids-col">
+      <div class="kids-col-head green-head">
+        🔵 Relocating Spouse / Partner
+        <div class="kids-col-sub">Long-term dependent visa — living with you</div>
+      </div>
+      <div class="kids-col-body">
+        <div style="font-size:0.7rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--green-deeper);margin:0 0 10px;padding:6px 0;border-bottom:2px solid var(--green-light);">🔵 RELOCATION DOCUMENTS</div>
+        <div class="req-row"><span class="ico">📘</span><span><strong>Philippine Passport</strong> — valid at least 18 months</span></div>
+        <div class="req-row"><span class="ico">🪪</span><span><strong>Dependent / Spouse Visa</strong> — processed via your employer's HR or host country immigration. You (OFW) must meet minimum salary requirements.</span></div>
+        <div class="req-row"><span class="ico">💍</span><span><strong>PSA Marriage Certificate</strong> — apostilled or authenticated copy. For common-law partners: some countries require proof of cohabitation or a notarized affidavit.</span></div>
+        <div class="req-row"><span class="ico">📋</span><span><strong>Spouse's PSA Birth Certificate</strong> — for visa application and identity verification</span></div>
+        <div class="req-row"><span class="ico">🏥</span><span><strong>Medical / Health Certificate</strong> — required by most GCC countries before dependent visa approval</span></div>
+        <div class="req-row"><span class="ico">💉</span><span><strong>Vaccination Records</strong> — may be required depending on host country</span></div>
+        <div class="req-row"><span class="ico">🧾</span><span><strong>Your employment contract &amp; pay slips</strong> — proof that you meet the salary threshold for sponsoring a dependent</span></div>
+        <div class="callout" style="margin-top:14px;">💡 Some GCC countries do not allow common-law partners on dependent visas — only legally married spouses. Confirm with your country's immigration rules.</div>
+      </div>
+    </div>
+    <div class="kids-col">
+      <div class="kids-col-head" style="background:#f59e0b;color:#fff;">
+        🟡 Spouse Visiting — Short Stay
+        <div class="kids-col-sub">Vacation or temporary visit to you abroad</div>
+      </div>
+      <div class="kids-col-body">
+        <div style="font-size:0.7rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#92400e;margin:0 0 10px;padding:6px 0;border-bottom:2px solid #fde68a;">🟡 VACATION DOCUMENTS ONLY</div>
+        <div class="req-row"><span class="ico">📘</span><span><strong>Philippine Passport</strong> — valid 6 months beyond return date</span></div>
+        <div class="req-row"><span class="ico">🌍</span><span><strong>Visit / Tourist Visa</strong> — sponsored by you (OFW) or applied independently. For GCC, you may sponsor the visit visa using your residency ID.</span></div>
+        <div class="req-row"><span class="ico">💍</span><span><strong>PSA Marriage Certificate</strong> — copy, useful to show relationship for visa sponsorship and for BI if questioned</span></div>
+        <div class="req-row"><span class="ico">🎫</span><span><strong>Return flight ticket</strong> — proof of intent to return to PH</span></div>
+        <div class="req-row"><span class="ico">🏦</span><span><strong>Financial proof</strong> — your pay slip or bank statement as the sponsor</span></div>
+        <div class="callout warn" style="margin-top:14px;">⚠️ No medical clearance, no health certificate needed for a short visit. Keep documents proportionate to the purpose of travel.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SENIOR PARENTS -->
+  <hr class="light" style="margin:0 0 48px">
+  <div id="sec-senior" style="margin-bottom:28px;">
+    <div class="section-eyebrow">Senior Parents</div>
+    <h3 class="section-heading" style="font-size:1.5rem;">Bringing Your Senior Citizen Parents</h3>
+    <p class="section-sub">Bringing lolo or lola abroad requires extra care — both in documentation and in practical planning. Their age and health status affect what they need at every immigration counter.</p>
+  </div>
+
+  <div class="kids-compare" style="margin-bottom:32px;">
+    <div class="kids-col">
+      <div class="kids-col-head green-head">
+        🔵 Senior Parent Relocating with You
+        <div class="kids-col-sub">Living with you long-term as a dependent (not always possible in all countries)</div>
+      </div>
+      <div class="kids-col-body">
+        <div style="font-size:0.7rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--green-deeper);margin:0 0 10px;padding:6px 0;border-bottom:2px solid var(--green-light);">🔵 RELOCATION DOCUMENTS</div>
+        <div class="req-row"><span class="ico">📘</span><span><strong>Philippine Passport</strong> — valid at least 18 months. Many seniors have outdated passports — renew early.</span></div>
+        <div class="req-row"><span class="ico">🪪</span><span><strong>Dependent Visa</strong> — availability varies widely by country. GCC countries generally allow parents as dependents if you meet a higher salary threshold. Check with your employer's HR or the host country's embassy.</span></div>
+        <div class="req-row"><span class="ico">👨‍👩‍👦</span><span><strong>PSA Birth Certificate (yours)</strong> — to prove the parent-child relationship</span></div>
+        <div class="req-row"><span class="ico">📋</span><span><strong>Parent's PSA Birth Certificate</strong> — authenticated/apostilled copy</span></div>
+        <div class="req-row"><span class="ico">🏥</span><span><strong>Comprehensive Medical Certificate</strong> — most GCC countries require a fitness-to-travel health certificate for senior dependents, often within 3 months of visa application</span></div>
+        <div class="req-row"><span class="ico">💊</span><span><strong>Medical records &amp; list of medications</strong> — required for entry and for healthcare access in the host country</span></div>
+        <div class="req-row"><span class="ico">🛡️</span><span><strong>Health / Medical Insurance</strong> — strongly recommended; some countries require it as a visa condition for elderly dependents</span></div>
+        <div class="callout warn" style="margin-top:14px;">⚠️ Not all GCC countries allow elderly parents as long-term dependents. Saudi Arabia and Kuwait have stricter rules. UAE and Qatar tend to be more flexible but require higher sponsor salary thresholds. Verify with your host country's immigration authority before making plans.</div>
+      </div>
+    </div>
+    <div class="kids-col">
+      <div class="kids-col-head" style="background:#f59e0b;color:#fff;">
+        🟡 Senior Parent Visiting — Short Stay
+        <div class="kids-col-sub">Vacation visit to you abroad, or a vacation to a third country</div>
+      </div>
+      <div class="kids-col-body">
+        <div style="font-size:0.7rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#92400e;margin:0 0 10px;padding:6px 0;border-bottom:2px solid #fde68a;">🟡 VACATION DOCUMENTS</div>
+        <div class="req-row"><span class="ico">📘</span><span><strong>Philippine Passport</strong> — valid 6 months beyond return date. Check well in advance — seniors often forget to renew.</span></div>
+        <div class="req-row"><span class="ico">🌍</span><span><strong>Visit Visa</strong> — sponsored by you (OFW) in GCC countries, or applied independently for third countries</span></div>
+        <div class="req-row"><span class="ico">🏥</span><span><strong>Medical Certificate / Fit-to-Fly</strong> — most airlines require this for passengers aged 70+, especially if traveling alone or with health conditions</span></div>
+        <div class="req-row"><span class="ico">💊</span><span><strong>Medication documentation</strong> — for customs clearance (some medications require a doctor's letter in foreign countries)</span></div>
+        <div class="req-row"><span class="ico">🛡️</span><span><strong>Travel Insurance</strong> — non-negotiable for seniors; Schengen requires it. Include emergency medical repatriation coverage.</span></div>
+        <div class="req-row"><span class="ico">🎫</span><span><strong>Return flight ticket</strong></span></div>
+        <div class="req-row"><span class="ico">🏦</span><span><strong>Financial guarantee / sponsorship letter</strong> — from you as the OFW sponsor, with your pay slip or bank statement</span></div>
+        <div class="callout" style="margin-top:14px;">💡 <strong>PH BI note:</strong> Senior citizens traveling alone may be questioned at PH immigration about who will care for them abroad. Have a clear itinerary and a receiving contact ready. If the senior has limited mobility, request airport wheelchair assistance when booking — this also fast-tracks them through immigration.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SENIOR PRACTICAL TIPS -->
+  <div style="background:#f9fafb;border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:24px 28px;margin-bottom:52px;">
+    <div style="font-family:'Sora',sans-serif;font-size:0.95rem;font-weight:700;color:var(--ink);margin-bottom:16px;">🧓 Practical Tips for Traveling with Senior Parents</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;">
+      <div style="font-size:0.83rem;color:var(--text);line-height:1.7;">
+        <strong style="color:var(--ink-soft);">At the Philippine Airport:</strong><br>
+        → Use the priority lane for senior citizens (60+) at all Philippine airports<br>
+        → Request a wheelchair or escort at check-in — airlines provide this free<br>
+        → Arrive 3.5 hours before the flight — seniors need more processing time
+      </div>
+      <div style="font-size:0.83rem;color:var(--text);line-height:1.7;">
+        <strong style="color:var(--ink-soft);">Documents to always carry:</strong><br>
+        → Philippine Senior Citizen ID (may support priority boarding)<br>
+        → Emergency contact card in English AND Tagalog<br>
+        → Copy of their medical history in English for foreign doctors
+      </div>
+      <div style="font-size:0.83rem;color:var(--text);line-height:1.7;">
+        <strong style="color:var(--ink-soft);">At your host country:</strong><br>
+        → Register them with the Philippine Embassy upon arrival<br>
+        → Set up local SIM with your number saved<br>
+        → Brief them on what to say at immigration: who they're visiting, how long they're staying
+      </div>
+    </div>
+  </div>
+
+  <!-- PTA SECTION -->
+  <hr class="light" style="margin:0 0 48px">
+  <div id="sec-pta">
+    <div class="section-eyebrow">Parental Travel Authority</div>
+    <h3 class="section-heading" style="font-size:1.5rem">PTA — When You Need It & How to Get It</h3>
+    <p class="section-sub">The PTA is a notarized consent letter that allows a child to travel with only one parent, with a guardian, or alone. It's your most critical document at the Philippine BI counter for any minor travel.</p>
+  </div>
+
+  <div class="clause-grid" style="margin-top:32px">
+    <div class="clause-item">
+      <div class="clause-icon">👤</div>
+      <div class="clause-title">What to Prepare</div>
+      <div class="clause-body">
+        📄 Notarized consent letter from the non-traveling parent<br>
+        📄 PSA Birth Certificate of the child<br>
+        📄 Photocopies of both parents' passports<br>
+        📄 Child's passport and travel itinerary<br>
+        📄 Contact details of receiving parent (if abroad)
+      </div>
+    </div>
+    <div class="clause-item">
+      <div class="clause-icon">🏛️</div>
+      <div class="clause-title">Where to Notarize</div>
+      <div class="clause-body">
+        🏛️ Any notary public in the Philippines (₱200–500)<br>
+        🏛️ Philippine Embassy or Consulate — if parent is abroad<br>
+        🏛️ POLO Office — free for OFWs<br><br>
+        <strong>GCC OFWs:</strong> Philippine Embassies in Doha, Abu Dhabi/Dubai, Riyadh/Jeddah, Kuwait City, Manama, and Muscat all offer notarization. Bring residency ID + passport.
+      </div>
+    </div>
+    <div class="clause-item">
+      <div class="clause-icon">⚠️</div>
+      <div class="clause-title">When PTA Is Required</div>
+      <div class="clause-body">
+        ✅ Child travels with only one parent<br>
+        ✅ Child travels with grandparents or relatives<br>
+        ✅ Child travels with a non-relative guardian<br>
+        ✅ Child travels as an unaccompanied minor<br><br>
+        ❌ NOT required if <strong>both parents</strong> are physically present at the airport
+      </div>
+    </div>
+  </div>
+
+  <!-- SPECIAL CLAUSES -->
+  <hr class="light" style="margin:48px 0 40px">
+  <div id="sec-special">
+    <div class="section-eyebrow">Special Situations</div>
+    <h3 class="section-heading" style="font-size:1.5rem">Special Clauses & Edge Cases</h3>
+    <p class="section-sub">Real-life situations are rarely textbook. Here's what to do when your circumstances fall outside the standard case.</p>
+  </div>
+
+  <div class="clause-grid" style="margin-top:32px">
+
+    <div class="clause-item">
+      <div class="clause-icon">🕊️</div>
+      <div class="clause-title">Traveling Parent is a Widow or Widower</div>
+      <div class="clause-body">
+        If one parent has passed away, the surviving parent is the <strong>sole legal guardian</strong> — no consent letter from the deceased parent is required.<br><br>
+        <strong>Bring instead:</strong><br>
+        📄 PSA Death Certificate of the deceased parent<br>
+        📄 PSA Birth Certificate of the child<br>
+        📄 Your valid ID and passport<br><br>
+        Present at the BI counter as proof of sole custody. The officer notes these in lieu of the usual PTA.
+      </div>
+    </div>
+
+    <div class="clause-item">
+      <div class="clause-icon">⚖️</div>
+      <div class="clause-title">Solo Parent by Legal Order</div>
+      <div class="clause-body">
+        If you have a court-issued <strong>sole custody order</strong> or a Solo Parent ID under RA 8972, this may suffice in lieu of the other parent's consent.<br><br>
+        <strong>Bring:</strong><br>
+        📄 Court Order or Solo Parent ID<br>
+        📄 PSA Birth Certificate<br>
+        📄 Your passport<br><br>
+        Some BI officers may still ask for more — carry the death certificate or notarized declaration as backup.
+      </div>
+    </div>
+
+    <div class="clause-item">
+      <div class="clause-icon">🧑‍🤝‍🧑</div>
+      <div class="clause-title">Child with a Non-Relative Guardian</div>
+      <div class="clause-body">
+        When a child travels with someone who is <strong>not a blood relative</strong> (family friend, employer household, sponsor), stricter documents are required.<br><br>
+        <strong>Required:</strong><br>
+        📄 Notarized SPA from <em>both parents</em> authorizing the specific guardian<br>
+        📄 Guardian's valid ID and passport<br>
+        📄 Child's passport and PSA Birth Certificate<br>
+        📄 Proof of purpose of travel<br>
+        📄 Affidavit of Support and Consent
+      </div>
+    </div>
+
+    <div class="clause-item">
+      <div class="clause-icon">🌐</div>
+      <div class="clause-title">Other Parent is an OFW Abroad</div>
+      <div class="clause-body">
+        If the other parent cannot visit a PH notary, they can execute the consent letter at:<br><br>
+        🏛️ <strong>Philippine Embassy / Consulate</strong> in host country<br>
+        🏛️ <strong>POLO Office</strong> — free for OFWs<br>
+        🏛️ Local notary + Apostille<br><br>
+        The document must be sent to the Philippines before the child's departure. Digital copies may be accepted in some BI cases — confirm beforehand.
+      </div>
+    </div>
+
+    <div class="clause-item">
+      <div class="clause-icon">🚫</div>
+      <div class="clause-title">Other Parent Unreachable or Refuses</div>
+      <div class="clause-body">
+        📄 File a petition at the <strong>Regional Trial Court (RTC)</strong> for a travel clearance order<br>
+        📄 Bring evidence of attempted contact (messages, affidavit of absence)<br>
+        📄 A lawyer can draft an <strong>Affidavit of No Communication</strong> to present to BI<br><br>
+        <strong>BI has discretion.</strong> Always resolve this legally before airport day — do not gamble on the officer's mood.
+      </div>
+    </div>
+
+    <div class="clause-item">
+      <div class="clause-icon">📜</div>
+      <div class="clause-title">Child is a Dual Citizen or Foreign National</div>
+      <div class="clause-body">
+        Philippine BI clearance rules still apply if the child is also a Filipino citizen.<br><br>
+        📄 Bring both passports if dual citizenship<br>
+        📄 Philippine BI may require a PTA regardless<br>
+        📄 Use the Philippine passport for BI exit processing<br>
+        📄 Present the destination-country passport on arrival abroad
+      </div>
+    </div>
+
+  </div>
+
+  <div class="big-callout">
+    <div class="bc-icon">💡</div>
+    <div>
+      <div class="bc-title">The golden rule: match your documents to your purpose</div>
+      <div class="bc-body">A <strong>vacation</strong> needs a passport, a return ticket, and — if solo parent — a PTA. That's it. A <strong>relocation</strong> needs visas, authenticated certificates, medical clearances, and employer coordination. Over-preparing for a vacation wastes time. Under-preparing for a relocation causes delays at the host country's immigration. Know the difference before you start collecting documents.</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════ BI TIPS ══════════════════ -->
+<div id="page-bitips" class="page">
+<div class="container">
+
+  <div class="section-eyebrow">Insider Knowledge</div>
+  <h2 class="section-heading">Philippine Immigration —<br>Tips, Tricks & What They Don't Tell You</h2>
+  <p class="section-sub">Hard-earned knowledge from OFWs who've been through it. Know your rights, avoid the common mistakes, and move through PH immigration like a pro.</p>
+
+  <div class="tips-hero" style="margin-top:36px">
+    <div class="tips-hero-icon">🛂</div>
+    <div>
+      <div class="tips-hero-title">The BI Counter is NOT the Enemy — But Be Prepared</div>
+      <div class="tips-hero-sub">Philippine Bureau of Immigration (BI) officers follow a checklist. If you know the checklist better than they do, you will never be offloaded, delayed, or hassled. Every tip below comes from real OFW experiences at NAIA, Mactan, and Clark airports.</div>
+    </div>
+  </div>
+
+  <!-- QUICK NAVIGATOR / TOC -->
+  <div class="toc-wrap">
+    <div class="toc-title">What's in this guide</div>
+    <div class="toc-sub">29 tips across 7 sections — click any to jump directly there.</div>
+    <div class="toc-list">
+      <a class="toc-item" onclick="scrollToId('bi-ofwlane')">
+        <div class="toc-icon-wrap" style="background:var(--green-faint);border-color:var(--green-mid);"><span>🟢</span></div>
+        <div class="toc-item-text">
+          <div class="toc-item-title">The OFW Blue Lane, OFW Wing & OFW Lounge</div>
+          <div class="toc-item-desc">What's the difference? Blue Lane vs. Lounge vs. OFW counter</div>
+        </div>
+        <span class="toc-item-count">6 tips</span>
+        <span class="toc-arrow">→</span>
+      </a>
+      <a class="toc-item" onclick="scrollToId('bi-family-lane')">
+        <div class="toc-icon-wrap" style="background:#f0f9ff;border-color:#bae6fd;"><span>👨‍👩‍👧</span></div>
+        <div class="toc-item-text">
+          <div class="toc-item-title">Traveling with Family — Which Lane</div>
+          <div class="toc-item-desc">Recommendation: use the regular lane. Here's why + the 2025 BI case</div>
+        </div>
+        <span class="toc-item-count">5 tips</span>
+        <span class="toc-arrow">→</span>
+      </a>
+      <a class="toc-item" onclick="scrollToId('bi-offload')">
+        <div class="toc-icon-wrap" style="background:#fff5f5;border-color:#fca5a5;"><span>🚫</span></div>
+        <div class="toc-item-text">
+          <div class="toc-item-title">Offloading — What It Is & How to Avoid It</div>
+          <div class="toc-item-desc">Common reasons, your rights, what to do if it happens</div>
+        </div>
+        <span class="toc-item-count">6 tips</span>
+        <span class="toc-arrow">→</span>
+      </a>
+      <a class="toc-item" onclick="scrollToId('bi-traveltax')">
+        <div class="toc-icon-wrap" style="background:#fffbeb;border-color:#fde68a;"><span>💸</span></div>
+        <div class="toc-item-text">
+          <div class="toc-item-title">Travel Tax, Terminal Fees & How to Save</div>
+          <div class="toc-item-desc">OFWs exempt from ₱950 terminal fee (raised Sep 2025) + travel tax</div>
+        </div>
+        <span class="toc-item-count">4 tips</span>
+        <span class="toc-arrow">→</span>
+      </a>
+      <a class="toc-item" onclick="scrollToId('bi-docs')">
+        <div class="toc-icon-wrap" style="background:#f9fafb;border-color:var(--border);"><span>📄</span></div>
+        <div class="toc-item-text">
+          <div class="toc-item-title">Document Prep — Build Your Airport Folder</div>
+          <div class="toc-item-desc">What to carry, how to back it up, passport timing</div>
+        </div>
+        <span class="toc-item-count">5 tips</span>
+        <span class="toc-arrow">→</span>
+      </a>
+      <a class="toc-item" onclick="scrollToId('bi-kids')">
+        <div class="toc-icon-wrap" style="background:#fdf4ff;border-color:#e9d5ff;"><span>👧</span></div>
+        <div class="toc-item-text">
+          <div class="toc-item-title">Traveling with Kids Through PH Immigration</div>
+          <div class="toc-item-desc">PTA at check-in, child interviews, grandparent rules</div>
+        </div>
+        <span class="toc-item-count">5 tips</span>
+        <span class="toc-arrow">→</span>
+      </a>
+      <a class="toc-item" onclick="scrollToId('bi-gcc')">
+        <div class="toc-icon-wrap" style="background:var(--green-faint);border-color:var(--green-mid);"><span>🌍</span></div>
+        <div class="toc-item-text">
+          <div class="toc-item-title">GCC OFWs — Country-Specific Notes</div>
+          <div class="toc-item-desc">Re-entry rules, POLO offices, BM Online from abroad</div>
+        </div>
+        <span class="toc-item-count">4 tips</span>
+        <span class="toc-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- SECTION 1: OFW LANE -->
+  <div class="tips-section" id="bi-ofwlane">
+    <div class="tips-section-head">
+      <div class="tips-section-icon">🟦</div>
+      <div class="tips-section-label">The OFW Blue Lane, OFW Wing & OFW Lounge — What's What</div>
+      <div class="tips-section-count">6 tips</div>
+    </div>
+
+    <!-- EXPLAINER CARD: THE THREE THINGS -->
+    <div style="background:var(--hero-bg);border-radius:var(--radius-lg);padding:24px 28px;margin-bottom:20px;border:1px solid rgba(34,197,94,0.2);">
+      <div style="font-family:'Sora',sans-serif;font-size:0.95rem;font-weight:700;color:var(--green);margin-bottom:16px;">🚨 OFWs get confused between these three — they are NOT the same thing</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;">
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:14px;">
+          <div style="font-size:0.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#86efac;margin-bottom:6px;">1 — OFW Blue Lane / Blue Zone</div>
+          <div style="font-size:0.81rem;color:#d1fae5;line-height:1.65;">A physically separate <strong>immigration processing wing</strong> at NAIA Terminal 3. Opened April 2025. You go through baggage X-ray and immigration stamps here — fully dedicated to OFWs. Currently confirmed at <strong>T3 only</strong>. Features semi-automated e-gate passport scanning. Clears in 3–10 minutes.</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:14px;">
+          <div style="font-size:0.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#86efac;margin-bottom:6px;">2 — OFW Lounge</div>
+          <div style="font-size:0.81rem;color:#d1fae5;line-height:1.65;">A <strong>rest and waiting area</strong> — NOT an immigration facility. Free food, drinks, Wi-Fi, charging, baggage storage. At T3 (near Gate 7, open since July 2024) and T1 (upgraded December 2025). You visit this <em>before or after</em> immigration — not instead of it.</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:14px;">
+          <div style="font-size:0.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#86efac;margin-bottom:6px;">3 — OFW Lane (T1, T2)</div>
+          <div style="font-size:0.81rem;color:#d1fae5;line-height:1.65;">The older, traditional dedicated counters for OFWs at NAIA T1 and T2 — separate counters within the regular immigration hall. Still active and valid. Not a "Blue Lane," no separate wing, but still significantly faster than tourist lines.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-list">
+
+      <div class="tip-item starred">
+        <div class="tip-num">1</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-mustknow">MUST KNOW</div>
+          <div class="tip-title">At NAIA T3: You MUST use the Blue Lane — the system won't let you stay in the regular line</div>
+          <div class="tip-desc">The OFW Blue Lane at NAIA Terminal 3 (far left of Lane A in the departure area) is now mandatory for documented OFWs at that terminal. Multiple OFWs have reported being redirected mid-queue from the regular immigration counters — officers say <em>"the system won't allow it."</em> Don't waste 40 minutes in the regular line only to be sent back. Go directly to the Blue Zone upon entering the departure hall.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">2</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-ofw">OFW TIP</div>
+          <div class="tip-title">The Blue Zone looks like a lounge — don't walk past it thinking it's just a waiting area</div>
+          <div class="tip-desc">Multiple OFWs have shared that they nearly missed the Blue Lane because it resembles a separate VIP zone or lounge at first glance. It is at the far left of the departure area inside T3. Look for the blue signage. You enter by scanning your boarding pass — no guard manually checking passports at the entrance. Once inside: baggage X-ray → e-gate passport scan → done. No officer conversation needed in most cases.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">3</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-trick">PRO TRICK</div>
+          <div class="tip-title">At T1 and T2: look for the OFW-dedicated counters within the regular immigration hall</div>
+          <div class="tip-desc">NAIA T1 and T2 do not yet have a separate Blue Lane wing. They have dedicated OFW counters inside the main immigration hall. At T1, look for the separate OFW section — it's clearly marked and significantly shorter than tourist queues. OWWA and DMW assistance desks at T1 and T3 can also help with document issues before you approach the counter.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">4</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-ofw">OFW TIP</div>
+          <div class="tip-title">The OFW Lounge is FREE — use it before or after immigration, not instead of it</div>
+          <div class="tip-desc">Both NAIA T3 (near Gate 7) and T1 lounges are open 24/7 at no cost, regardless of your airline or ticket class. Amenities include complimentary food and drinks, resting areas, Wi-Fi, charging stations, and baggage storage. Over 706,000 OFWs used these lounges in 2024–2025 alone. Visit the lounge <strong>after</strong> you clear immigration, not as a substitute for it. Your boarding pass is your access.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">5</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-trick">PRO TRICK</div>
+          <div class="tip-title">Have your OEC printed AND on your phone — lead with the printout at counters; phone is fine at e-gates</div>
+          <div class="tip-desc">At traditional OFW counters (T1/T2), officers prefer paper — printing avoids screen fumbling delays. At the T3 Blue Zone e-gates, you scan your boarding pass digitally and your passport biometrics do the work — no OEC handover needed at the gate itself. However, still carry a printed OEC for airline check-in travel tax exemption and as backup if e-gate systems are down.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">6</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-mustknow">MUST KNOW</div>
+          <div class="tip-title">Present your OEC at check-in first — not only at immigration</div>
+          <div class="tip-desc">Airlines collect travel tax on behalf of the government. Some counters will charge you the ₱950 terminal fee (raised from ₱550 in September 2025) and travel tax upfront if you don't proactively show your OEC. Present it at the airline check-in counter before they issue your boarding pass. OFWs remain fully exempt from both the travel tax and the new ₱950 terminal fee — but you have to show the document first.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 2: OFW LANE WITH FAMILY -->
+  <div class="tips-section" id="bi-family-lane">
+    <div class="tips-section-head">
+      <div class="tips-section-icon">👨‍👩‍👧</div>
+      <div class="tips-section-label">Traveling with Family — Which Lane to Use</div>
+      <div class="tips-section-count">5 tips</div>
+    </div>
+
+    <div style="background:#450a0a;border:1.5px solid #f87171;border-radius:var(--radius);padding:20px 24px;margin-bottom:16px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:flex-start;">
+      <span style="font-size:1.8rem;">⚠️</span>
+      <div>
+        <div style="font-family:'Sora',sans-serif;font-size:0.95rem;font-weight:700;color:#fca5a5;margin-bottom:6px;">Our recommendation: If traveling with family, use the regular immigration lane.</div>
+        <div style="font-size:0.83rem;color:#fecaca;line-height:1.75;">Technically, immediate family may be processed with you in the OFW lane — but in practice, this creates real risk. A verified BI case from November 2025 showed an OFW family miss their Dubai flight because one companion was pulled for secondary inspection. The T3 Blue Lane is semi-automated and optimized for a single OFW. Any deviation — a child needing PTA review, a spouse on a tourist visa, a parent needing extra verification — can hold everyone up or trigger secondary inspection. <strong>The regular lane handles mixed-group travel more reliably.</strong> Save the Blue Lane speed for when you are flying solo.</div>
+      </div>
+    </div>
+
+    <div class="tip-list">
+
+      <div class="tip-item starred">
+        <div class="tip-num">1</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-mustknow">MUST KNOW</div>
+          <div class="tip-title">Real case: an OFW family missed their flight using the OFW lane with a non-family companion</div>
+          <div class="tip-desc">The Bureau of Immigration issued a public advisory in November 2025 about this exact scenario. An OFW couple and their child were cleared through the OFW lane — but their household helper, who had a tourist visa and a different flight itinerary, was sent to secondary inspection. The family refused to proceed to the gate without her and missed their Dubai flight. BI's reminder: proceed to your gate once cleared. The safer lesson: don't bring that risk into the OFW lane to begin with.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">2</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-trick">PRO TRICK</div>
+          <div class="tip-title">Best strategy: OFW uses the Blue Lane solo, family uses the regular lane at the same time — meet at the gate</div>
+          <div class="tip-desc">Split up at the immigration area entrance. The OFW goes to the Blue Lane (T3) or OFW counter (T1/T2) and clears in 3–10 minutes. Family members — spouse, kids, parents — go through the regular lane simultaneously. The OFW waits at the gate. This way nobody's time is wasted, no one causes a secondary inspection that delays the whole group, and if something comes up with a family member's documents, it's resolved in the regular lane without affecting the OFW's clearance.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">3</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-mustknow">MUST KNOW</div>
+          <div class="tip-title">If you do use the OFW lane together — only 1st degree family qualifies, with PSA proof</div>
+          <div class="tip-desc">Under DOJ-IACAT guidelines, immediate family in the 1st civil degree (spouse, children, parents) on the same flight may be processed with the OFW without secondary inspection — but only with PSA-certified relationship documents: Marriage Certificate (for spouse), Birth Certificate (for children or parents). No PSA documents means possible secondary inspection. Non-relatives, extended family, household helpers, or companions cannot use the OFW lane under any circumstances.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">4</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-mustknow">MUST KNOW</div>
+          <div class="tip-title">PTA is still required for children — no exceptions, regardless of which lane you use</div>
+          <div class="tip-desc">The OFW lane and Blue Zone do not waive any document requirements. If only one parent is accompanying a child, the Parental Travel Authority is mandatory. An incomplete document set will be flagged whether you're at the Blue Lane e-gate or a regular OFW counter. If there is any uncertainty about your child's PTA, the regular lane gives you space to resolve it without holding up others.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">5</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-ofw">OFW TIP</div>
+          <div class="tip-title">Family on a different flight uses the regular lane only — OFW privileges do not transfer</div>
+          <div class="tip-desc">If any family member is traveling on a different date or flight, they cannot use the OFW lane at all. Your OEC is tied to your specific departure. Spouses, children, and parents traveling independently go through the regular immigration lane and must bring their own complete documents — return tickets, financial proof, accommodation details, and any required visas.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+    <!-- SECTION 3: OFFLOADING -->
+  <div class="tips-section" id="bi-offload">
+    <div class="tips-section-head">
+      <div class="tips-section-icon">🚫</div>
+      <div class="tips-section-label">Offloading — What It Is & How to Avoid It</div>
+      <div class="tips-section-count">6 tips</div>
+    </div>
+
+    <div class="tip-redbox">
+      <div class="tip-redbox-title">⛔ Common reasons OFWs get offloaded (denied departure)</div>
+      <ul>
+        <li>No OEC or expired OEC (past the 60-day window)</li>
+        <li>OWWA membership lapsed or not paid</li>
+        <li>Traveling without a valid work visa for the destination</li>
+        <li>Suspicious travel patterns (multiple short trips, no clear employment)</li>
+        <li>Minors without Parental Travel Authority (PTA)</li>
+        <li>Insufficient or suspicious documents for a tourist trip</li>
+        <li>Being flagged in the BI database (unpaid fines, watchlisted, etc.)</li>
+      </ul>
+    </div>
+
+    <div class="tip-list" style="margin-top:16px">
+
+      <div class="tip-item starred">
+        <div class="tip-num">1</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-mustknow">MUST KNOW</div>
+          <div class="tip-title">Offloading is not an arrest — but you can appeal on the spot</div>
+          <div class="tip-desc">If you are offloaded, you are <strong>not detained or arrested</strong>. You have the right to ask the officer to specify the exact reason in writing. Request a Form BI-OFW-001 (Offloading Notice). This document is your basis for appeal. Calm, polite firmness goes further than arguments at the counter.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">2</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-trick">PRO TRICK</div>
+          <div class="tip-title">Bring more documents than you think you need</div>
+          <div class="tip-desc">BI officers have discretion. Bring your employment contract (original or notarized copy), your OWWA receipt, your work visa, a recent payslip or ID from your employer, and your employer's contact details. The more evidence of legitimate employment you carry, the harder it is to be questioned.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">3</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-ofw">OFW TIP</div>
+          <div class="tip-title">If you're a first-time OFW, you may be asked to show your PDOS certificate</div>
+          <div class="tip-desc">The Pre-Departure Orientation Seminar (PDOS) certificate is proof that you attended the mandatory DMW/OWWA orientation. First-time OFWs are sometimes asked for this at the BI counter. Keep it with your other OEC documents — it's issued on the same day as your OEC application if done at a DMW office.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">4</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-trick">PRO TRICK</div>
+          <div class="tip-title">Know the difference between being questioned and being offloaded</div>
+          <div class="tip-desc">Officers may ask you questions about your employer, your job, your salary, or your trip. This is <strong>normal questioning, not offloading</strong>. Answer calmly, consistently, and with documents to back it up. Hesitation or inconsistent answers invite more scrutiny. Practice your answers if you're nervous.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">5</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-mustknow">MUST KNOW</div>
+          <div class="tip-title">You can call the OWWA hotline or POLO if you're having issues at the airport</div>
+          <div class="tip-desc">OWWA Hotline: <strong>1348</strong> (available 24/7). DMW Hotline: <strong>(02) 8722-1144</strong>. If your OEC is being questioned or your records aren't pulling up in the system, call these numbers. They can verify your records in real time and speak to the officer or desk if needed.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">6</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-ofw">OFW TIP</div>
+          <div class="tip-title">Keep a screenshot of your OEC confirmation email from DMW</div>
+          <div class="tip-desc">The OEC system sometimes has technical issues where records don't sync immediately. Your DMW account confirmation email with the OEC reference number is proof that your application was approved. Screenshots of the BM Online approval page also work as backup evidence.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 4: TRAVEL TAX & FEES -->
+  <div class="tips-section" id="bi-traveltax">
+    <div class="tips-section-head">
+      <div class="tips-section-icon">💸</div>
+      <div class="tips-section-label">Travel Tax, Terminal Fees & How to Save Money</div>
+      <div class="tips-section-count">4 tips</div>
+    </div>
+    <div class="tip-list">
+
+      <div class="tip-item starred">
+        <div class="tip-num">1</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-mustknow">MUST KNOW</div>
+          <div class="tip-title">OEC exemption saves you travel tax + ₱950 terminal fee — every single trip</div>
+          <div class="tip-desc">As of September 2025, NAIA's terminal fee (Passenger Service Charge) was raised from ₱550 to <strong>₱950</strong> for international departures — the first increase in over 20 years. OFWs remain fully exempt from both the terminal fee and the travel tax (₱1,620). That's over <strong>₱2,570 saved per trip</strong> just from being a documented OFW with a valid OEC. Over 10 trips home, that's ₱25,700+ back in your pocket. Never skip the OEC to "save time."</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">2</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-trick">PRO TRICK</div>
+          <div class="tip-title">If the airline already charged you travel tax — you can claim a refund</div>
+          <div class="tip-desc">If an airline collected travel tax without checking your OEC first, go to the <strong>Travel Tax Counter at the airport</strong> (operated by Tourism Infrastructure and Enterprise Zone Authority — TIEZA) before your flight. Show your OEC and get a refund or exemption certificate. This can be done even after check-in as long as you're not past immigration.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">3</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-ofw">OFW TIP</div>
+          <div class="tip-title">Dependents of OFWs can also get a reduced travel tax rate</div>
+          <div class="tip-desc">OFW spouses and unmarried children under 21 traveling with or on behalf of the OFW may qualify for a <strong>reduced travel tax of ₱400 (economy) or ₱800 (business)</strong> instead of the full rate. Bring: OFW's OEC copy, marriage/birth certificate, and your relationship proof documents. Process at the TIEZA counter before check-in.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">4</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-trick">PRO TRICK</div>
+          <div class="tip-title">Terminal fee is sometimes already included in your airline ticket</div>
+          <div class="tip-desc">Some airlines and booking platforms include the terminal fee in the ticket price. Check your airline receipt before claiming an exemption — if it's already included, the process for getting it back is more complicated. Look for "terminal fee" or "passenger service charge" as a line item on your booking confirmation.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 5: DOCUMENTS -->
+  <div class="tips-section" id="bi-docs">
+    <div class="tips-section-head">
+      <div class="tips-section-icon">📄</div>
+      <div class="tips-section-label">Document Prep — Build Your Airport Folder</div>
+      <div class="tips-section-count">5 tips</div>
+    </div>
+    <div class="tip-list">
+
+      <div class="tip-item starred">
+        <div class="tip-num">1</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-mustknow">MUST KNOW</div>
+          <div class="tip-title">The "OFW Airport Folder" — always travel with one</div>
+          <div class="tip-desc">Keep a dedicated folder (physical) with: passport, OEC or exemption printout, OWWA receipt, validated employment contract (copy), work visa, airline ticket, and emergency contacts. Having everything in one place means zero panic at the counter. Label each document with a sticky note if needed.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">2</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-trick">PRO TRICK</div>
+          <div class="tip-title">Scan everything and save to your email / cloud before traveling</div>
+          <div class="tip-desc">Email yourself a PDF of every document — passport bio page, OEC, OWWA receipt, contract, visa. If your bag is lost, stolen, or you leave your folder in the taxi, you still have everything accessible from any device anywhere in the world. Google Drive or iCloud works perfectly for this.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">3</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-ofw">OFW TIP</div>
+          <div class="tip-title">Bring a PSA Birth Certificate copy — always, even if no kids are involved</div>
+          <div class="tip-desc">Some BI officers ask for additional identity proof beyond your passport. A PSA Birth Certificate is the most accepted Philippine identity document. It also comes in handy if you're asked to prove citizenship at a foreign embassy or consulate while abroad. Keep 2–3 authenticated copies with you.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">4</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-trick">PRO TRICK</div>
+          <div class="tip-title">Check your passport expiry 6 months before every trip — not the day before</div>
+          <div class="tip-desc">DFA passport renewal takes <strong>15 working days (regular) or 7 working days (expedite)</strong> in the Philippines, and can take longer at consulates abroad. Many host countries and airlines will deny boarding if your passport expires within 6 months of your travel date. Set a calendar reminder 8 months before your passport expires.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">5</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-ofw">OFW TIP</div>
+          <div class="tip-title">Register with the DFA e-Register before every trip abroad</div>
+          <div class="tip-desc">The DFA's e-Register (<strong>eregistry.dfa.gov.ph</strong>) lets the Philippine government know you're abroad. In emergencies — typhoons, civil unrest, pandemics — this is how the government locates and assists Filipinos overseas. Registration is free, takes 5 minutes, and can genuinely save your life in a crisis. Update it every time your address or employer changes.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 6: KIDS AT BI -->
+  <div class="tips-section" id="bi-kids">
+    <div class="tips-section-head">
+      <div class="tips-section-icon">👧</div>
+      <div class="tips-section-label">Traveling with Kids Through Philippine Immigration</div>
+      <div class="tips-section-count">5 tips</div>
+    </div>
+    <div class="tip-list">
+
+      <div class="tip-item starred">
+        <div class="tip-num">1</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-kids">KIDS TIP</div>
+          <div class="tip-title">PTA questions come BEFORE you reach the BI booth — prepare for the check-in counter too</div>
+          <div class="tip-desc">Some airlines ask about traveling minors at check-in before BI even sees you. Have your PTA ready at the airline counter, not just at immigration. This prevents your check-in from being flagged and escalated unnecessarily.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">2</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-kids">KIDS TIP</div>
+          <div class="tip-title">BI may interview your child separately — prepare them calmly</div>
+          <div class="tip-desc">In cases where officers suspect trafficking or suspicious travel, they may briefly speak to the child alone to confirm their travel intent. Prepare your child by letting them know this may happen and that it's normal. Brief them to answer honestly and calmly: where they're going, who they're traveling with, and who they'll meet.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">3</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-mustknow">MUST KNOW</div>
+          <div class="tip-title">The Inter-Country Adoption Board (ICAB) clearance is required for children being adopted out of the country</div>
+          <div class="tip-desc">If a child is traveling with non-biological guardians and there is any indication of adoption or permanent relocation, BI will require ICAB clearance. Bring adoption papers, court orders, and DSWD documents if applicable. BI takes child protection very seriously — more documentation is always better.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">4</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-kids">KIDS TIP</div>
+          <div class="tip-title">Grandparents traveling with grandchildren need more than just a PTA</div>
+          <div class="tip-desc">A notarized consent letter from both parents is required. Additionally, bring <strong>proof of relationship</strong> — the child's birth certificate (showing the parents' names) and the grandparent's own ID showing the family surname connection. BI may also ask for an Affidavit of Consent and Support.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">5</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-trick">PRO TRICK</div>
+          <div class="tip-title">Apply for the PTA as early as possible — it has no official expiry but some officers check the notarization date</div>
+          <div class="tip-desc">While a PTA technically has no mandated expiry, BI officers may question a notarized document that is more than 6 months old. If your travel plans changed and your old PTA is dated far back, get a fresh notarization to avoid any issue. It costs less than ₱500 and takes 30 minutes.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 7: GCC SPECIFIC -->
+  <div class="tips-section" id="bi-gcc">
+    <div class="tips-section-head">
+      <div class="tips-section-icon">🌍</div>
+      <div class="tips-section-label">GCC OFWs — Country-Specific Immigration Notes</div>
+      <div class="tips-section-count">4 tips</div>
+    </div>
+    <div class="tip-list">
+
+      <div class="tip-item starred">
+        <div class="tip-num">1</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-ofw">GCC TIP</div>
+          <div class="tip-title">Always confirm your re-entry clearance status before flying home</div>
+          <div class="tip-desc"><strong>Qatar & Saudi Arabia</strong> require a re-entry visa for most workers before leaving. <strong>UAE</strong> (on employment visa) and <strong>Kuwait</strong> may also require exit clearance from your employer. <strong>Bahrain and Oman</strong> generally allow exit without employer permission, but verify your specific visa type. Never assume — ask your HR or check your residency card terms before booking your PH flight.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">2</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-ofw">GCC TIP</div>
+          <div class="tip-title">POLO offices in GCC countries can help with most pre-departure documents</div>
+          <div class="tip-desc">Philippine Overseas Labor Offices (POLO) are present in all GCC countries: Doha (Qatar), Abu Dhabi & Dubai (UAE), Riyadh & Jeddah (Saudi Arabia), Kuwait City, Manama (Bahrain), and Muscat (Oman). They can assist with: OEC applications, OWWA renewal, notarization of consent letters, and labor dispute assistance — all at no cost to OFWs.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">3</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-trick">PRO TRICK</div>
+          <div class="tip-title">Apply for your BM Online OEC from abroad — you don't need to be in the Philippines</div>
+          <div class="tip-desc">The BM Online system at <strong>oec.dmw.gov.ph</strong> is fully accessible from your GCC country. You can apply, pay, and download your OEC or exemption document from your phone or laptop without visiting a DMW office. Payment is via credit/debit card or GCash (if linked to a PH account). Process it 1–2 weeks before your scheduled departure date.</div>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-num">4</div>
+        <div class="tip-body">
+          <div class="tip-badge badge-ofw">GCC TIP</div>
+          <div class="tip-title">Your GCC residency ID is not a substitute for a Philippine work visa at PH immigration</div>
+          <div class="tip-desc">BI is looking for your <strong>Philippine-side documentation</strong> — OEC, OWWA, validated contract — not your foreign residency card. Your QID, Emirates ID, Iqama, etc. are proof for the host country's airport, not for BI. Know what each airport counter needs and organize your documents accordingly before you reach the queue.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="big-callout">
+    <div class="bc-icon">🛂</div>
+    <div>
+      <div class="bc-title">The golden rule at Philippine immigration</div>
+      <div class="bc-body">Be calm, be prepared, and be organized. Officers process hundreds of passengers daily — those who hand over a clean, complete folder with everything in order move through in under 2 minutes. Those who dig through bags, fumble with phones, or get defensive about questions create their own delays. Your documents tell your story before you say a word. Make sure they tell the right one.</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function scrollToId(id) {
+  event.preventDefault();
+  const el = document.getElementById(id);
+  if (el) { setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50); }
+}
+</script>
+</body>
+</html>
